@@ -51,15 +51,15 @@ export default function Home() {
                   </th>
                   <th
                     scope="col"
-                    className="px-3 min-w-[155px] py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
                   >
-                    Antal investeringar
+                    Minsta värde
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
                   >
-                    Minsta värde
+                    Investeringar
                   </th>
                   <th
                     scope="col"
@@ -82,19 +82,22 @@ export default function Home() {
                       {person.party}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      {new Intl.NumberFormat("sv-SE", {
+                        style: "currency",
+                        currency: "SEK",
+                      }).format(person.investments.length * 114600)}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <InvestmentsClickable
                         amount={person.investments.length}
                         firstName={person.firstName}
                         lastName={person.lastName}
                       >
                         {person.investments.length}
-                      </InvestmentsClickable>
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {new Intl.NumberFormat("sv-SE", {
-                        style: "currency",
-                        currency: "SEK",
-                      }).format(person.investments.length * 114600)}
+                      </InvestmentsClickable>{" "}
+                      <span style={{ fontSize: 9 }} className="text-xs">
+                        bolag
+                      </span>
                     </td>
                     <td
                       title={format(
