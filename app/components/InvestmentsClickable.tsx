@@ -62,7 +62,7 @@ export const InvestmentsClickable = ({
             setOpen(false);
           }}
         >
-          <Input type="email" required placeholder="Email" />
+          <Input name="email" type="email" required placeholder="Email" />
           <DialogFooter className="mt-3">
             <Button type="submit">Håll mig uppdaterad</Button>
           </DialogFooter>
