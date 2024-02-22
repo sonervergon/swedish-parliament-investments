@@ -12,4 +12,6 @@ const schema = z.array(
   })
 );
 
-export const list = schema.parse(data);
+export const list = schema
+  .parse(data)
+  .sort((a, b) => b.investments.length - a.investments.length);
