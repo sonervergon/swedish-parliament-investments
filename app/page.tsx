@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="md:flex py-16 min-h-screen max-w-screen bg-white flex-col items-center justify-between p-2 lg:p-24">
-      <div className="max-w-3xl sm:px-6 lg:px-8">
+      <div className="max-w-4xl sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-2xl mb-2 font-semibold leading-6 text-gray-900">
@@ -51,9 +51,15 @@ export default function Home() {
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
+                    className="px-3 min-w-[155px] py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
                   >
                     Antal investeringar
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
+                  >
+                    Minsta värde
                   </th>
                   <th
                     scope="col"
@@ -84,6 +90,12 @@ export default function Home() {
                         {person.investments.length}
                       </InvestmentsClickable>
                     </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      {new Intl.NumberFormat("sv-SE", {
+                        style: "currency",
+                        currency: "SEK",
+                      }).format(person.investments.length * 114600)}
+                    </td>
                     <td
                       title={format(
                         new Date(person.registrationDate),
@@ -99,7 +111,26 @@ export default function Home() {
             </table>
           </div>
         </div>
-        <div className="sm:flex mt-16 flex-col sm:items-center">
+        <div className="sm:flex mt-16 flex-col">
+          <div className="sm:flex-auto mb-12">
+            <h2 className="text-base font-semibold leading-6 text-gray-900">
+              Hur kan jag använda denna data?
+            </h2>
+            <p className="mt-2 text-sm text-gray-700">
+              Det är helt upp till dig. Du kan använda den för att samla
+              inspiration till ditt egna aktiesparande eller till exempel göra
+              egna undersökningar baserat på insikterna som du kan plocka ut
+              från datan.
+            </p>
+          </div>
+          <div className="sm:flex-auto mb-12">
+            <h2 className="text-base font-semibold leading-6 text-gray-900">
+              Hur ser jag exakt vilka företag en politiker har investerat i?
+            </h2>
+            <p className="mt-2 text-sm text-gray-700">
+              Vi jobbar på att få in den datan, håll utkik här.
+            </p>
+          </div>
           <div className="sm:flex-auto mb-12">
             <h2 className="text-base font-semibold leading-6 text-gray-900">
               Hur kommer det sig att denna data finns tillgänglig här?
