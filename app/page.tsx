@@ -77,7 +77,9 @@ export default function Home() {
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <InvestmentsClickable
-                        name={person.firstName + " " + person.lastName}
+                        amount={person.investments.length}
+                        firstName={person.firstName}
+                        lastName={person.lastName}
                       >
                         {person.investments.length}
                       </InvestmentsClickable>

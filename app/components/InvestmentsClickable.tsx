@@ -16,9 +16,16 @@ import { PropsWithChildren, useState } from "react";
 
 export const InvestmentsClickable = ({
   children,
-  name,
-}: PropsWithChildren<{ name: string }>) => {
+  firstName,
+  lastName,
+  amount,
+}: PropsWithChildren<{
+  firstName: string;
+  lastName: string;
+  amount: number;
+}>) => {
   const [open, setOpen] = useState(false);
+  const fullName = firstName + " " + lastName;
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -26,7 +33,7 @@ export const InvestmentsClickable = ({
           className="cursor-pointer underline"
           onClick={() => {
             setOpen(true);
-            posthog.capture("Clicked Investment", { name });
+            posthog.capture("Clicked Investment", { name: fullName, amount });
           }}
         >
           {children}
@@ -34,11 +41,13 @@ export const InvestmentsClickable = ({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Vi jobbar på det</DialogTitle>
+          <DialogTitle>
+            {firstName} har investerat i {amount} bolag
+          </DialogTitle>
           <DialogDescription className="mb-3">
-            Snart kommer du kunna se vilka bolag {name} har investerat i. Håll
-            utkik här eller dela din e-post så får du en notifikation när datan
-            är tillgänglig.
+            Snart kommer du även kunna se vilka bolag {fullName} har investerat
+            i. Håll utkik här eller dela din e-post så får du en notifikation
+            när datan är tillgänglig.
           </DialogDescription>
         </DialogHeader>
         <form
@@ -46,8 +55,9 @@ export const InvestmentsClickable = ({
             const form = new FormData(data.currentTarget);
             const email = form.get("email");
             posthog.capture("Submited Email for Investment Updates", {
-              name,
+              name: fullName,
               email,
+              amount,
             });
             setOpen(false);
           }}
