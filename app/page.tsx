@@ -3,13 +3,14 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/sv";
 import { list } from "./data";
+import { Alert } from "./client";
 
 dayjs.extend(relativeTime);
 dayjs.locale("sv");
 export default function Home() {
   return (
     <main className="flex min-h-screen bg-white flex-col items-center justify-between p-24">
-      <div className="px-4 sm:px-6 lg:px-8">
+      <div className="px-4 max-w-3xl sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-base font-semibold leading-6 text-gray-900">
@@ -63,7 +64,11 @@ export default function Home() {
                     {person.party}
                   </td>
                   <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                    {person.investments.length}
+                    <Alert
+                      text={`Snart kommer du kunna se vilka bolag ${person.firstName} har investerat i.`}
+                    >
+                      {person.investments.length}
+                    </Alert>
                   </td>
                   <td
                     title={format(
@@ -78,6 +83,20 @@ export default function Home() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="sm:flex mt-16 sm:items-center">
+          <div className="sm:flex-auto">
+            <h2 className="text-base font-semibold leading-6 text-gray-900">
+              Hur kommer det sig att denna data finns tillgänglig här?
+            </h2>
+            <p className="mt-2 text-sm text-gray-700">
+              Varje riksdagsledamot måste rapportera deras åtaganden och
+              ekonomiska intressen, detta med syfte av att skapa öppenhet och
+              insyn. Tyvärr finns denna data inte tillgänglig på riksdagens
+              webbplats, därför har vi tagit fram den och gjort den enkel att
+              komma åt.
+            </p>
+          </div>
         </div>
       </div>
     </main>
