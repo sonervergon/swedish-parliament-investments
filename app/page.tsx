@@ -110,6 +110,18 @@ export default function Home() {
               komma åt.
             </p>
           </div>
+          <div className="sm:flex-auto mb-12">
+            <h2 className="text-base font-semibold leading-6 text-gray-900">
+              Varför finns inte alla riksdagledamöter med i listan?
+            </h2>
+            <p className="mt-2 text-sm text-gray-700">
+              Om ledamoten inte har några investeringar eller om värdet på
+              åtagandet eller det ekonomiska intresset är under två
+              prisbasbelopp (57 300kr * 2 = 114 600kr för 2024) så behöver inte
+              ledamoten rapportera några investeringar. Detta kan vara en
+              anledning till att alla ledamöter inte har rapporterad något.
+            </p>
+          </div>
         </div>
       </div>
     </main>
