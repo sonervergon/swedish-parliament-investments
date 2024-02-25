@@ -4,8 +4,12 @@ import "dayjs/locale/sv";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Metadata } from "next";
 import { InvestmentsClickable } from "./components/InvestmentsClickable";
-import { list } from "./data";
+import { InvestmentsPieChart } from "./components/InvestmentsPieChart";
 import { KeepMeUpdated } from "./components/KeepMeUpdated";
+import { PartyInvestmentsChart } from "./components/PartyInvestmentsChart";
+import { list } from "./data";
+import { Button } from "@/components/ui/button";
+import { FAQButton } from "./components/FAQButton";
 
 dayjs.extend(relativeTime);
 dayjs.locale("sv");
@@ -22,16 +26,20 @@ export default function Home() {
       <div className="max-w-4xl sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-2xl mb-2 font-semibold leading-6 text-gray-900">
+            <h1 className="text-3xl mb-2 font-semibold  text-gray-900">
               Riksdagspolitikernas ekonomiska investeringar
             </h1>
             <p className="text-sm mb-3 text-gray-700">
               Se hur de svenska politikerna investerar sina pengar
             </p>
           </div>
-          <KeepMeUpdated />
         </div>
-
+        <KeepMeUpdated />
+        <FAQButton />
+        <div className="flex gap-4 mt-16 flex-wrap flex-row w-full">
+          <InvestmentsPieChart />
+          <PartyInvestmentsChart />
+        </div>
         <div className=" -mx-4 mt-8 w-full overflow-x-auto sm:-mx-0">
           <div className="inline-block min-w-full py-2 align-middle">
             <table className="w-full divide-y divide-gray-300">
@@ -114,7 +122,7 @@ export default function Home() {
             </table>
           </div>
         </div>
-        <div className="sm:flex mt-16 flex-col">
+        <div id="faq" className="sm:flex mt-16 flex-col">
           <div className="sm:flex-auto mb-12">
             <h2 className="text-base font-semibold leading-6 text-gray-900">
               Hur kan jag använda denna data?
