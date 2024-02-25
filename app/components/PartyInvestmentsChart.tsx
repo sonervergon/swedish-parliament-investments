@@ -76,8 +76,8 @@ export const PartyInvestmentsChart = () => {
       <CardHeader>
         <CardTitle>Investeringar per parti</CardTitle>
         <CardDescription>
-          {data[0].party}s representater har flest antal investeringar
-          sammanlagt bland alla partier.
+          {data[0].party}s representater har sammanlagt flest antal
+          investeringar bland alla partier.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex h-full">
