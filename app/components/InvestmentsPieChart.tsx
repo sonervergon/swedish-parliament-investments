@@ -8,14 +8,8 @@ import {
 } from "@/components/ui/card";
 import React, { PureComponent } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import { list } from "../data";
 
 const MAX_POLITICIANS = 349;
-
-const data = [
-  { name: "Rapporterat", value: list.length },
-  { name: "Ej rapporterat", value: MAX_POLITICIANS - list.length },
-];
 
 const COLORS = ["#c084fc", "#000"];
 
@@ -68,7 +62,11 @@ const renderActiveShape = (props: any) => {
   );
 };
 
-export default class Example extends PureComponent {
+interface Props {
+  totalInList: number;
+}
+
+export default class Example extends PureComponent<Props> {
   static demoUrl =
     "https://codesandbox.io/s/pie-chart-with-customized-label-dlhhj";
 
@@ -83,6 +81,13 @@ export default class Example extends PureComponent {
   };
 
   render() {
+    const data = [
+      { name: "Rapporterat", value: this.props.totalInList },
+      {
+        name: "Ej rapporterat",
+        value: MAX_POLITICIANS - this.props.totalInList,
+      },
+    ];
     return (
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={300} height={300}>
@@ -115,18 +120,22 @@ export default class Example extends PureComponent {
   }
 }
 
-export const InvestmentsPieChart = () => {
+export const InvestmentsPieChart = ({
+  totalInList,
+}: {
+  totalInList: number;
+}) => {
   return (
     <Card className="flex-1 min-w-[300px] flex flex-col h-[330px]">
       <CardHeader>
         <CardTitle>Andel rapporter från ledamöter</CardTitle>
         <CardDescription>
-          21% ({list.length} av 349) ledamöter i riksdagen har rapporterat
+          21% ({totalInList} av 349) ledamöter i riksdagen har rapporterat
           ekonomiska intressen.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex h-full">
-        <Example />
+        <Example totalInList={totalInList} />
       </CardContent>
     </Card>
   );

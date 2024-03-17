@@ -1,6 +1,11 @@
+import { env } from "@/env";
 import { schema } from "@/lib/data-schema";
-import data from "../generated/data.json";
 
-export const list = schema
-  .parse(data)
-  .sort((a, b) => b.investments.length - a.investments.length);
+export const getList = async () => {
+  const response = await fetch(env.DATA_SOURCE);
+  const data = await response.json();
+
+  return schema
+    .parse(data)
+    .sort((a, b) => b.investments.length - a.investments.length);
+};

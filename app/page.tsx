@@ -3,13 +3,12 @@ import dayjs from "dayjs";
 import "dayjs/locale/sv";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Metadata } from "next";
+import { FAQButton } from "./components/FAQButton";
 import { InvestmentsClickable } from "./components/InvestmentsClickable";
 import { InvestmentsPieChart } from "./components/InvestmentsPieChart";
 import { KeepMeUpdated } from "./components/KeepMeUpdated";
 import { PartyInvestmentsChart } from "./components/PartyInvestmentsChart";
-import { list } from "./data";
-import { Button } from "@/components/ui/button";
-import { FAQButton } from "./components/FAQButton";
+import { getList } from "./data";
 
 dayjs.extend(relativeTime);
 dayjs.locale("sv");
@@ -20,7 +19,8 @@ export const metadata: Metadata = {
     "Få insyn och se alla Svenska riksdagledamöters ekonomiska investeringar med ett enkelt klick, helt öppet och publikt",
 };
 
-export default function Home() {
+export default async function Home() {
+  const data = await getList();
   return (
     <main className="md:flex py-16 min-h-screen max-w-screen bg-white flex-col items-center justify-between p-2 lg:p-24">
       <div className="max-w-4xl sm:px-6 lg:px-8">
@@ -37,8 +37,8 @@ export default function Home() {
         <KeepMeUpdated />
         <FAQButton />
         <div className="flex gap-4 mt-16 flex-wrap flex-row w-full">
-          <InvestmentsPieChart />
-          <PartyInvestmentsChart />
+          <InvestmentsPieChart totalInList={data.length} />
+          <PartyInvestmentsChart input={data} />
         </div>
         <div className=" -mx-4 mt-8 w-full overflow-x-auto sm:-mx-0">
           <div className="inline-block min-w-full py-2 align-middle">
@@ -81,7 +81,7 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody className="divide-y cursor-default divide-gray-200 bg-white">
-                {list.map((person) => (
+                {data.map((person) => (
                   <tr key={person.firstName + person.lastName}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                       {person.firstName} {person.lastName}

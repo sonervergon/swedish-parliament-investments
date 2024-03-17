@@ -1,11 +1,12 @@
+import { env } from "@/env";
 import { getCompanyName } from "./utils/get-company-name";
 import { getData } from "./utils/get-data";
 import countBy from "lodash/countBy";
 import * as pw from "playwright-core";
 
 const main = async () => {
-  const data = await getData();
-  const formattedInvestments = data.map(({ investments }) => {
+  const data = await getData(env.LIST_SOURCE!);
+  const formattedInvestments = data?.map(({ investments }) => {
     const list = investments.map((investment) => {
       const { name, type } = getCompanyName(investment);
       return {
@@ -16,7 +17,7 @@ const main = async () => {
     });
     return list;
   });
-  const dataArray = formattedInvestments.flat();
+  const dataArray = formattedInvestments?.flat();
   const d = countBy(dataArray, "name");
   const companies = Object.keys(d);
 

@@ -16,38 +16,22 @@ import {
   Tooltip,
   XAxis,
 } from "recharts";
-import { list } from "../data";
 
 interface Entry {
   antal: number;
   party: string;
 }
 
-const data = Object.values(
-  list.reduce<Record<string, Entry>>((prev, current) => {
-    if (prev[current.party]) {
-      prev[current.party].antal =
-        prev[current.party].antal + current.investments.length;
-      return prev;
-    }
-    const entry = {
-      antal: current.investments.length,
-      party: current.party,
-    };
-    prev[current.party] = entry;
-
-    return prev;
-  }, {})
-).sort((a, b) => b.antal - a.antal);
-
-export default class Example extends PureComponent {
+export default class Example extends PureComponent<{
+  data: Entry[];
+}> {
   render() {
     return (
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={this.props.data}
           margin={{
             top: 5,
             right: 30,
@@ -70,7 +54,29 @@ export default class Example extends PureComponent {
   }
 }
 
-export const PartyInvestmentsChart = () => {
+interface Data {
+  party: string;
+  investments: string[];
+}
+
+export const PartyInvestmentsChart = ({ input }: { input: Data[] }) => {
+  const data = Object.values(
+    input.reduce<Record<string, Entry>>((prev, current) => {
+      if (prev[current.party]) {
+        prev[current.party].antal =
+          prev[current.party].antal + current.investments.length;
+        return prev;
+      }
+      const entry = {
+        antal: current.investments.length,
+        party: current.party,
+      };
+      prev[current.party] = entry;
+
+      return prev;
+    }, {})
+  ).sort((a, b) => b.antal - a.antal);
+
   return (
     <Card className="flex-1 min-w-[300px] flex flex-col h-[330px]">
       <CardHeader>
@@ -81,7 +87,7 @@ export const PartyInvestmentsChart = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex h-full">
-        <Example />
+        <Example data={data} />
       </CardContent>
     </Card>
   );
