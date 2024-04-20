@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import dayjs from "dayjs";
 import "dayjs/locale/sv";
@@ -9,8 +10,6 @@ import { InvestmentsPieChart } from "./components/InvestmentsPieChart";
 import { KeepMeUpdated } from "./components/KeepMeUpdated";
 import { PartyInvestmentsChart } from "./components/PartyInvestmentsChart";
 import { getList } from "./data";
-import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
 
 dayjs.extend(relativeTime);
 dayjs.locale("sv");
@@ -108,10 +107,10 @@ export default async function Home() {
                   </tr>
                 </thead>
                 <tbody className="divide-y cursor-default divide-gray-200 bg-white">
-                  {data.map((person) => (
-                    <tr key={person.firstName + person.lastName}>
+                  {data.map((person, i) => (
+                    <tr key={i}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                        {person.firstName} {person.lastName}
+                        Politiker {i + 1}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {person.party}
@@ -125,8 +124,8 @@ export default async function Home() {
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <InvestmentsClickable
                           amount={person.investments.length}
-                          firstName={person.firstName}
-                          lastName={person.lastName}
+                          firstName="denna"
+                          lastName="politiker"
                         >
                           {person.investments.length}
                         </InvestmentsClickable>{" "}
