@@ -27,7 +27,7 @@ export default async function Home() {
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-3xl mb-2 font-semibold  text-gray-900">
-              Riksdagspolitikernas ekonomiska investeringar
+              Riksdagspolitikernas ekonomiska intressen
             </h1>
             <p className="text-sm mb-3 text-gray-700">
               Se hur de svenska politikerna investerar sina pengar
