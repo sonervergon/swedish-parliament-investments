@@ -24,7 +24,7 @@
     "langchain": "^0.1.23",
     "lodash": "^4.17.21",
     "lucide-react": "^0.336.0",
-    "next": "14.2.3",
+    "next": "14.2.10",
     "node-html-parser": "^6.1.12",
     "openai": "^4.28.0",
     "playwright-core": "^1.42.0",
